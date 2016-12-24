@@ -1,0 +1,11 @@
+<library path="lib/libmavros_offboard">
+	<class name="global_position_int" type="mavros::offboard_plugins::GlobalPositionIntPlugin" base_class_type="mavros::plugin::PluginBase">
+		<description>global_position_int plugin.</description>
+	</class>
+	<class name="local_position_ned" type="mavros::offboard_plugins::LocalPositionNedPlugin" base_class_type="mavros::plugin::PluginBase">
+		<description>local_position_ned plugin.</description>
+	</class>
+  <class name="hil_gps" type="mavros::offboard_plugins::HilGpsPlugin" base_class_type="mavros::plugin::PluginBase">
+		<description>hil_gps plugin.</description>
+	</class>
+</library>

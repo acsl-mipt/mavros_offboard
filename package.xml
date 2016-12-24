@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>mavros_offboard</name>
+  <version>0.0.1</version>
+  <description>Nodes and plugins for offboard control with <a href="http://wiki.rot.org/mavros">MAVROS</a>.</description>
+
+  <maintainer email="korotkov.es@mipt.ru">Korotkov E.S.</maintainer>
+  <author email="korotkov.es@mipt.ru">Korotkov E.S.</author>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>mavros</build_depend>
+  <run_depend>mavros</run_depend>
+
+  <export>
+    <mavros plugin="${prefix}/mavros_plugins.xml" />
+  </export>
+</package>
