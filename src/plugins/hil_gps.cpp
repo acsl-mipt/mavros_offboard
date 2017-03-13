@@ -33,18 +33,18 @@ private:
 
   void set_cb(const std_msgs::Float64MultiArray::ConstPtr &marr) {
     std::vector<double> v = marr->data;
-    if (v.size() == 9)
+    if (v.size() == 10)
     {
-      send_hil_gps(
-        v.at(0), v.at(1), v.at(2),
-        v.at(3), v.at(4),
-        v.at(5), v.at(6), v.at(7),
-        v.at(8)
+      send_hil_gps(v.at(0),
+        v.at(1), v.at(2), v.at(3),
+        v.at(4), v.at(5),
+        v.at(6), v.at(7), v.at(8),
+        v.at(9)
       );
     }
   }
 
-  void send_hil_gps(
+  void send_hil_gps(double fix_type,
     double lat,double lon,double alt,
     double eph,double epv,
     double vh,double vu,double cog,
@@ -53,7 +53,7 @@ private:
     mavlink::common::msg::HIL_GPS msg;
     //msg.time_usec = (ros::Time::now() - start_time).toNSec()/1000;
     msg.time_usec = ros::Time::now().toNSec()/1000;
-    msg.fix_type = 3;
+    msg.fix_type = fix_type;
     msg.lat = round(lat * 1E7);
     msg.lon = round(lon * 1E7);
     msg.alt = round(alt * 1E3);
