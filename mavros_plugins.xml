@@ -1,4 +1,7 @@
 <library path="lib/libmavros_offboard">
+	<class name="gps_raw_int" type="mavros::offboard_plugins::GPSRawIntPlugin" base_class_type="mavros::plugin::PluginBase">
+		<description>gps_raw_int plugin.</description>
+	</class>
 	<class name="global_position_int" type="mavros::offboard_plugins::GlobalPositionIntPlugin" base_class_type="mavros::plugin::PluginBase">
 		<description>global_position_int plugin.</description>
 	</class>

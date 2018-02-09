@@ -121,6 +121,7 @@ include_directories(
 ## Declare a C++ library
 add_library(mavros_offboard
 #   src/${PROJECT_NAME}/mavros_examples.cpp
+  src/plugins/gps_raw_int.cpp
   src/plugins/global_position_int.cpp
   src/plugins/local_position_ned.cpp
   src/plugins/hil_gps.cpp
