@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>mavros_offboard</name>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
   <description>Nodes and plugins for offboard control with <a href="http://wiki.ros.org/mavros">MAVROS</a>.</description>
 
   <maintainer email="korotkov.es@mipt.ru">Korotkov E.S.</maintainer>

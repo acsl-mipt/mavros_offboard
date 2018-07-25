@@ -125,6 +125,7 @@ add_library(mavros_offboard
   src/plugins/global_position_int.cpp
   src/plugins/local_position_ned.cpp
   src/plugins/hil_gps.cpp
+  src/plugins/attitude.cpp
 )
 
 ## Add cmake target dependencies of the library

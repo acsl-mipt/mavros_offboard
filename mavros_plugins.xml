@@ -11,4 +11,7 @@
   <class name="hil_gps" type="mavros::offboard_plugins::HilGpsPlugin" base_class_type="mavros::plugin::PluginBase">
 		<description>hil_gps plugin.</description>
 	</class>
+  <class name="attitude" type="mavros::offboard_plugins::AttitudePlugin" base_class_type="mavros::plugin::PluginBase">
+		<description>attitude plugin.</description>
+	</class>
 </library>
