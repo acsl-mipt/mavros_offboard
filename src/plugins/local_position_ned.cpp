@@ -18,6 +18,7 @@ public:
 
     lpn_vel_sub = nh.subscribe("set_target/vel", 10, &LocalPositionNedPlugin::vel_cb, this);
     accel_sub = nh.subscribe("set_target/accel", 10, &LocalPositionNedPlugin::accel_cb, this);
+    pos_sub = nh.subscribe("set_target/pos", 10, &LocalPositionNedPlugin::pos_cb, this);
     //lpn_pub = nh.advertise<std_msgs::Float32MultiArray>("all", 10);
   }
 
@@ -31,7 +32,7 @@ public:
 
 private:
   ros::NodeHandle nh;
-  ros::Subscriber lpn_vel_sub,accel_sub;
+  ros::Subscriber lpn_vel_sub,accel_sub,pos_sub;
   //ros::Publisher lpn_pub;
 
   /*
@@ -84,6 +85,22 @@ private:
           0,0,0,
           v.at(0), v.at(1), v.at(2),
           0, yaw_rate
+      );
+    }
+  }
+
+  void pos_cb(const std_msgs::Float32MultiArray::ConstPtr &marr) {
+    uint16_t mask = (3 << 10) | (63 << 3); // 0b0000110111111000
+
+    std::vector<float> v = marr->data;
+    if (v.size() == 3)
+    {
+      set_position_target_local_ned(
+          mask,
+          v.at(0), v.at(1), v.at(2),
+          0,0,0,
+          0,0,0,
+          0, 0
       );
     }
   }
