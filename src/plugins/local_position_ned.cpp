@@ -19,6 +19,9 @@ public:
     lpn_vel_sub = nh.subscribe("set_target/vel", 10, &LocalPositionNedPlugin::vel_cb, this);
     accel_sub = nh.subscribe("set_target/accel", 10, &LocalPositionNedPlugin::accel_cb, this);
     pos_sub = nh.subscribe("set_target/pos", 10, &LocalPositionNedPlugin::pos_cb, this);
+
+    vxy_pz_sub = nh.subscribe("set_target/vxy_pz", 10, &LocalPositionNedPlugin::vxy_pz_cb, this);
+
     //lpn_pub = nh.advertise<std_msgs::Float32MultiArray>("all", 10);
   }
 
@@ -32,7 +35,7 @@ public:
 
 private:
   ros::NodeHandle nh;
-  ros::Subscriber lpn_vel_sub,accel_sub,pos_sub;
+  ros::Subscriber lpn_vel_sub,accel_sub,pos_sub,vxy_pz_sub;
   //ros::Publisher lpn_pub;
 
   /*
@@ -105,6 +108,23 @@ private:
     }
   }
 
+  void vxy_pz_cb(const std_msgs::Float32MultiArray::ConstPtr &marr) {
+    //do not ignore vz, px4 ignores vx,vy,vz if one of them ignored
+    uint16_t mask = (63 << 6) | (3 << 0); // 0b0000111111000011
+
+    std::vector<float> v = marr->data;
+    if (v.size() == 3)
+    {
+      set_position_target_local_ned(
+          mask,
+          0,0, v.at(2),
+          v.at(0), v.at(1), 0,
+          0,0,0,
+          0,0
+      );
+    }
+  }
+
   void set_position_target_local_ned(
     uint16_t type_mask,
     float x,float y,float z,
@@ -113,7 +133,7 @@ private:
     float yaw, float yaw_rate)
   {
     uint32_t time_boot_ms = 0;
-    uint8_t coordinate_frame = 1;
+    uint8_t coordinate_frame = 1; //MAV_FRAME_LOCAL_NED
     //m_uas->get_time_offset
 
     mavlink::common::msg::SET_POSITION_TARGET_LOCAL_NED sp;
